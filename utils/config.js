@@ -1,6 +1,6 @@
-const { NODE_ENV, JWT_SECRET, HOST = 'localhost'} = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports = {
-  JWT_SECRET: NODE_ENV === 'production' ? JWT_SECRET : 'super-secret-key',
-  MongoDB: `mongodb://${HOST}:27017/moviesdb`,
+  JWT_SECRET: NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret',
+  Mongodb: `mongodb://localhost:27017/moviesdb`,
 };

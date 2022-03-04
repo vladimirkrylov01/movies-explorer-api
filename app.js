@@ -10,23 +10,34 @@ const app = express();
 const router = require('./routes/index');
 const { Errors } = require('./errors/errors');
 
-const { requestLogger, errorLogger} = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const limiter = require('./utils/ratelimiter');
 
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-const corsAllowed = []
+const corsAllowed = [
+  'https://localhost:3000',
+  'http://localhost:3000',
+  'http://51.250.4.56',
+  'https://51.250.4.56',
+  'http://krylov.nomoredomains.xyz',
+  'https://krylov.nomoredomains.xyz',
+  'https://api.krylov.nomoredomains.xyz',
+  'http://api.krylov.nomoredomains.xyz',
+]
 
 require('dotenv').config();
+
 app.use(cors({
-  credentials:true,
-  origin(origin,callback){
-    if(corsAllowed.includes(origin) || !origin) {
-      callback(null,true)
+  credentials: true,
+  origin(origin, callback) {
+    if (corsAllowed.includes(origin) || !origin) {
+      callback(null, true);
     } else {
-      callback(new Error('CORS ERROR!'))
+      callback(new Error('CORS Error'));
     }
   },
 }));
@@ -43,6 +54,6 @@ app.use(errorLogger);
 app.use(errors());
 app.use(Errors);
 
-app.listen(PORT,() => {
-  console.log(`App started. PORT - http://localhost:${PORT}`)
-})
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
