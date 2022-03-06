@@ -1,7 +1,8 @@
+const {INTERNAL_SERVER_ERROR_STATUS} = require("../utils/constants");
 module.exports.Errors = (err, req, res, next) => {
-  const { statusCode = 500, message } = err;
+  const { statusCode = INTERNAL_SERVER_ERROR_STATUS, message } = err;
   res.status(statusCode).send({
-    message: statusCode === 500 ? 'серверная ошибка' : message,
+    message: statusCode === INTERNAL_SERVER_ERROR_STATUS ? 'серверная ошибка' : message,
   });
   next();
 };
