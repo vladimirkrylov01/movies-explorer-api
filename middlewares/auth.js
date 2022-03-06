@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
 
   if (!token) {
-    throw new NotAuthError('Проблемы с аутентификацией');
+    throw new NotAuthError('Проблемы с авторизацией');
   }
 
   let payload;
