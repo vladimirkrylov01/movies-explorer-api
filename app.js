@@ -3,9 +3,17 @@ const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const helmet = require('helmet');
+const mongoose = require('mongoose');
+const { Mongodb } = require('./utils/config');
 
 const { PORT = 3000 } = process.env;
 const app = express();
+mongoose.connect(Mongodb, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+});
 
 const router = require('./routes/index');
 const { Errors } = require('./errors/errors');
@@ -27,7 +35,7 @@ const corsAllowed = [
   'https://krylov.nomoredomains.xyz',
   'https://api.krylov.nomoredomains.xyz',
   'http://api.krylov.nomoredomains.xyz',
-]
+];
 
 require('dotenv').config();
 
@@ -44,8 +52,8 @@ app.use(cors({
 
 app.options('*', cors());
 
-app.use(helmet());
 app.use(requestLogger);
+app.use(helmet());
 app.use(limiter);
 
 app.use(router);
