@@ -13,7 +13,7 @@ const {
 
 usersRouter.post('/signin', userLoginValidation, logIn);
 usersRouter.post('/signup', userCreateValidation, createUser);
-usersRouter.delete('/signout', logOut);
+usersRouter.get('/signout', logOut);
 
 usersRouter.get('/users', auth, getUsers);
 usersRouter.get('/users/me', auth, getCurrentUser);
