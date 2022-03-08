@@ -20,7 +20,7 @@ const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const limiter = require('./utils/ratelimiter');
-const {Errors} = require("./utils/errors/errors");
+const { Errors } = require('./utils/errors/errors');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
